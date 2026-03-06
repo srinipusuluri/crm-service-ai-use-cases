@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in CRM Service Cloud - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --service-blue: #2563eb;
+            --support-green: #10b981;
+            --resolution-orange: #f59e0b;
+            --help-purple: #8b5cf6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--service-blue), var(--support-green), var(--resolution-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--service-blue), var(--support-green));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--service-blue), var(--support-green), var(--resolution-orange));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(37, 99, 235, 0.2); color: var(--service-blue); }
+        .icon.gen { background: rgba(16, 185, 129, 0.2); color: var(--support-green); }
+        .icon.ag { background: rgba(139, 92, 246, 0.2); color: var(--help-purple); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--service-blue), var(--support-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--service-blue);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--service-blue);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--service-blue);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .support-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .resolution-badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠 AI in CRM Service Cloud</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Customer Service, Support Operations, and Case Management</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for service optimization, case management, and customer satisfaction
+            </p>
+
+            <div class="card-grid">
+                <!-- Case Escalation Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Case Escalation</div>
+                            <div class="card-subtitle">Risk Assessment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict which customer cases are likely to require escalation based on case complexity, customer sentiment, and historical patterns.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Escalation Prediction</span>
+                            <span class="tech-tag">Case Analysis</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Sentiment Analysis</span>
+                            <span class="tech-tag">Service Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Data → Complexity Analysis → Escalation Prediction → Routing → Resolution → Monitoring</div>
+                            <div class="architecture-item">Case Data → Analysis → Prediction → Routing → Resolution → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case complexity indicators</li>
+                                <li>Customer sentiment</li>
+                                <li>Historical escalation patterns</li>
+                                <li>Agent expertise</li>
+                                <li>Resolution timelines</li>
+                                <li>Customer value</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Escalation Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Resolution Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLA Breach Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⏰</div>
+                        <div>
+                            <div class="card-title">SLA Breach</div>
+                            <div class="card-subtitle">Compliance Monitoring</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict potential SLA breaches by analyzing case complexity, agent workload, and historical resolution times.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">SLA Monitoring</span>
+                            <span class="tech-tag">Breach Prediction</span>
+                            <span class="tech-tag">Workload Analysis</span>
+                            <span class="tech-tag">Time Management</span>
+                            <span class="tech-tag">Service Compliance</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Data → Workload Analysis → SLA Prediction → Alerts → Intervention → Prevention</div>
+                            <div class="architecture-item">Case Data → Analysis → Prediction → Alerts → Intervention → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case complexity</li>
+                                <li>Agent workload</li>
+                                <li>Historical resolution times</li>
+                                <li>SLA requirements</li>
+                                <li>Priority levels</li>
+                                <li>Resource availability</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Breach Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">SLA Compliance</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Response Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resolution Time Estimation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⏱️</div>
+                        <div>
+                            <div class="card-title">Resolution Time</div>
+                            <div class="card-subtitle">Time Prediction</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Estimate resolution times for customer cases based on issue complexity, agent expertise, and historical performance data.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Time Estimation</span>
+                            <span class="tech-tag">Resolution Prediction</span>
+                            <span class="tech-tag">Case Complexity</span>
+                            <span class="tech-tag">Agent Performance</span>
+                            <span class="tech-tag">Service Planning</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Details → Complexity Analysis → Time Estimation → Assignment → Resolution → Tracking</div>
+                            <div class="architecture-item">Case Data → Analysis → Estimation → Assignment → Resolution → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Issue complexity</li>
+                                <li>Agent expertise</li>
+                                <li>Historical resolution times</li>
+                                <li>Case type</li>
+                                <li>Required resources</li>
+                                <li>Priority level</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Time Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Resolution Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Expectations</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- First Call Resolution Probability -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">📞</div>
+                        <div>
+                            <div class="card-title">First Call Resolution</div>
+                            <div class="card-subtitle">Resolution Optimization</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict the probability of resolving customer issues on the first contact by analyzing case details and agent capabilities.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">FCR Prediction</span>
+                            <span class="tech-tag">Resolution Probability</span>
+                            <span class="tech-tag">Agent Matching</span>
+                            <span class="tech-tag">Issue Analysis</span>
+                            <span class="tech-tag">Service Quality</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Issue Data → Agent Analysis → FCR Prediction → Assignment → Resolution → Quality</div>
+                            <div class="architecture-item">Issue Data → Analysis → Prediction → Assignment → Resolution → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Issue complexity</li>
+                                <li>Agent expertise</li>
+                                <li>Historical FCR rates</li>
+                                <li>Customer history</li>
+                                <li>Issue type</li>
+                                <li>Required resources</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">FCR Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Resolution Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Churn Risk -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Customer Churn Risk</div>
+                            <div class="card-subtitle">Retention Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict customer churn risk by analyzing service interactions, satisfaction levels, and historical behavior patterns.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Churn Prediction</span>
+                            <span class="tech-tag">Customer Analysis</span>
+                            <span class="tech-tag">Satisfaction Monitoring</span>
+                            <span class="tech-tag">Retention Strategy</span>
+                            <span class="tech-tag">Service Quality</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Interaction Data → Satisfaction Analysis → Churn Prediction → Retention → Intervention → Prevention</div>
+                            <div class="architecture-item">Customer Data → Analysis → Prediction → Retention → Intervention → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Service interaction history</li>
+                                <li>Customer satisfaction</li>
+                                <li>Issue resolution quality</li>
+                                <li>Response times</li>
+                                <li>Communication patterns</li>
+                                <li>Historical churn indicators</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Churn Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Retention Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sentiment Analysis -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">😊</div>
+                        <div>
+                            <div class="card-title">Sentiment Analysis</div>
+                            <div class="card-subtitle">Emotion Detection</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Analyze customer sentiment in communications to understand emotional state and tailor service responses accordingly.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Sentiment Analysis</span>
+                            <span class="tech-tag">Emotion Detection</span>
+                            <span class="tech-tag">Text Analysis</span>
+                            <span class="tech-tag">Customer Understanding</span>
+                            <span class="tech-tag">Service Personalization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Communication Data → Text Analysis → Sentiment Detection → Response → Personalization → Satisfaction</div>
+                            <div class="architecture-item">Text Data → Analysis → Detection → Response → Personalization → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer communications</li>
+                                <li>Language patterns</li>
+                                <li>Emotional indicators</li>
+                                <li>Historical sentiment</li>
+                                <li>Response effectiveness</li>
+                                <li>Service context</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Sentiment Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Response Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content creation, communication, and analysis for customer service, support operations, and case management
+            </p>
+
+            <div class="card-grid">
+                <!-- Case Summary Generation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📋</div>
+                        <div>
+                            <div class="card-title">Case Summaries</div>
+                            <div class="card-subtitle">Case Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive case summaries with key details, resolution steps, and follow-up requirements for efficient case management.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Case Summarization</span>
+                            <span class="tech-tag">Documentation</span>
+                            <span class="tech-tag">Resolution Tracking</span>
+                            <span class="tech-tag">Case Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Data → Information Extraction → Summary Generation → Review → Documentation → Management</div>
+                            <div class="architecture-item">Case Data → Extraction → Generation → Review → Documentation → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case details</li>
+                                <li>Customer information</li>
+                                <li>Issue description</li>
+                                <li>Resolution steps</li>
+                                <li>Follow-up requirements</li>
+                                <li>Case status</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Summary Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Information Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-60 seconds</div>
+                                <div class="metric-label">Summary Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Assist Responses -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🤖</div>
+                        <div>
+                            <div class="card-title">Agent Assist</div>
+                            <div class="card-subtitle">Response Generation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate suggested responses and solutions for customer service agents based on case details, knowledge base, and best practices.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Response Generation</span>
+                            <span class="tech-tag">Agent Assistance</span>
+                            <span class="tech-tag">Knowledge Base</span>
+                            <span class="tech-tag">Solution Matching</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Details → Knowledge Analysis → Response Generation → Agent Review → Customer Response → Resolution</div>
+                            <div class="architecture-item">Case Data → Analysis → Generation → Review → Response → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case details</li>
+                                <li>Knowledge base</li>
+                                <li>Best practices</li>
+                                <li>Agent expertise</li>
+                                <li>Customer history</li>
+                                <li>Resolution patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Response Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Agent Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">5-10 minutes</div>
+                                <div class="metric-label">Response Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Article Creation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📚</div>
+                        <div>
+                            <div class="card-title">Knowledge Articles</div>
+                            <div class="card-subtitle">Content Creation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive knowledge base articles with troubleshooting steps, solutions, and best practices for common issues.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Article Generation</span>
+                            <span class="tech-tag">Knowledge Management</span>
+                            <span class="tech-tag">Troubleshooting</span>
+                            <span class="tech-tag">Content Creation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Issue Data → Solution Analysis → Article Generation → Review → Publication → Access</div>
+                            <div class="architecture-item">Issue Data → Analysis → Generation → Review → Publication → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Common issues</li>
+                                <li>Solution patterns</li>
+                                <li>Best practices</li>
+                                <li>Technical documentation</li>
+                                <li>Customer feedback</li>
+                                <li>Update requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Article Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Self-Service Usage</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">10-15 minutes</div>
+                                <div class="metric-label">Article Creation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Email Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📧</div>
+                        <div>
+                            <div class="card-title">Customer Emails</div>
+                            <div class="card-subtitle">Communication Drafting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate professional, empathetic customer service emails with clear explanations, updates, and resolution information.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Email Generation</span>
+                            <span class="tech-tag">Customer Communication</span>
+                            <span class="tech-tag">Service Updates</span>
+                            <span class="tech-tag">Resolution Communication</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Details → Customer Context → Email Generation → Review → Sending → Customer Response</div>
+                            <div class="architecture-item">Case Data → Context → Generation → Review → Sending → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case status</li>
+                                <li>Customer preferences</li>
+                                <li>Communication history</li>
+                                <li>Resolution details</li>
+                                <li>Brand guidelines</li>
+                                <li>Response tracking</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Email Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">2-5 minutes</div>
+                                <div class="metric-label">Email Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chatbot Responses -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">💬</div>
+                        <div>
+                            <div class="card-title">Chatbot Responses</div>
+                            <div class="card-subtitle">Automated Support</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate intelligent chatbot responses that understand customer intent and provide accurate, helpful information.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Chatbot Responses</span>
+                            <span class="tech-tag">Intent Recognition</span>
+                            <span class="tech-tag">Natural Language</span>
+                            <span class="tech-tag">Automated Support</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Input → Intent Analysis → Response Generation → Chatbot → Customer → Resolution</div>
+                            <div class="architecture-item">Input Data → Analysis → Generation → Chatbot → Customer → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer queries</li>
+                                <li>Intent patterns</li>
+                                <li>Response templates</li>
+                                <li>Knowledge base</li>
+                                <li>Escalation criteria</li>
+                                <li>Feedback loops</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Response Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Resolution Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-5 seconds</div>
+                                <div class="metric-label">Response Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complaint Resolution Drafts -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📝</div>
+                        <div>
+                            <div class="card-title">Complaint Resolution</div>
+                            <div class="card-subtitle">Resolution Drafting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive complaint resolution drafts with acknowledgment, investigation findings, and proposed solutions.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Resolution Drafting</span>
+                            <span class="tech-tag">Complaint Analysis</span>
+                            <span class="tech-tag">Customer Communication</span>
+                            <span class="tech-tag">Solution Proposals</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Complaint Details → Investigation → Resolution Draft → Review → Customer → Resolution</div>
+                            <div class="architecture-item">Complaint Data → Investigation → Draft → Review → Customer → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Complaint details</li>
+                                <li>Investigation findings</li>
+                                <li>Resolution policies</li>
+                                <li>Customer history</li>
+                                <li>Communication guidelines</li>
+                                <li>Escalation procedures</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Resolution Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">10-15 minutes</div>
+                                <div class="metric-label">Resolution Drafting</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex service operations and customer support workflows
+            </p>
+
+            <div class="card-grid">
+                <!-- Autonomous Service Resolution Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🤖</div>
+                        <div>
+                            <div class="card-title">Autonomous Service</div>
+                            <div class="card-subtitle">Resolution Automation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Provide autonomous service resolution through AI agents that can diagnose issues, execute solutions, and escalate when necessary.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Autonomous Resolution</span>
+                            <span class="tech-tag">Issue Diagnosis</span>
+                            <span class="tech-tag">Solution Execution</span>
+                            <span class="tech-tag">Escalation Management</span>
+                            <span class="tech-tag">Service Automation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Issue Report → Diagnosis → Solution → Execution → Verification → Escalation</div>
+                            <div class="architecture-item">Issue Data → Diagnosis → Solution → Execution → Verification → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Issue patterns</li>
+                                <li>Solution databases</li>
+                                <li>Escalation criteria</li>
+                                <li>Resolution workflows</li>
+                                <li>Customer preferences</li>
+                                <li>Service protocols</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Resolution Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Response Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Management Orchestration Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📋</div>
+                        <div>
+                            <div class="card-title">Case Management</div>
+                            <div class="card-subtitle">Workflow Orchestration</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Orchestrate case management workflows by coordinating between agents, systems, and customers to ensure efficient resolution.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Case Orchestration</span>
+                            <span class="tech-tag">Workflow Management</span>
+                            <span class="tech-tag">Agent Coordination</span>
+                            <span class="tech-tag">System Integration</span>
+                            <span class="tech-tag">Resolution Tracking</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Case Creation → Workflow → Coordination → Resolution → Follow-up → Closure</div>
+                            <div class="architecture-item">Case Data → Workflow → Coordination → Resolution → Follow-up → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Case workflows</li>
+                                <li>Agent assignments</li>
+                                <li>System integrations</li>
+                                <li>Resolution protocols</li>
+                                <li>Customer communication</li>
+                                <li>Quality standards</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Workflow Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Resolution Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escalation Routing Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">↗️</div>
+                        <div>
+                            <div class="card-title">Escalation Routing</div>
+                            <div class="card-subtitle">Priority Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically route escalated cases to appropriate specialists based on expertise, workload, and case complexity.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Escalation Routing</span>
+                            <span class="tech-tag">Specialist Matching</span>
+                            <span class="tech-tag">Workload Balancing</span>
+                            <span class="tech-tag">Priority Management</span>
+                            <span class="tech-tag">Expertise Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Escalation Trigger → Analysis → Routing → Assignment → Resolution → Feedback</div>
+                            <div class="architecture-item">Escalation Data → Analysis → Routing → Assignment → Resolution → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Specialist expertise</li>
+                                <li>Workload distribution</li>
+                                <li>Case complexity</li>
+                                <li>Escalation criteria</li>
+                                <li>Response time requirements</li>
+                                <li>Resolution history</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Routing Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Resolution Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Specialist Utilization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field Service Coordination Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔧</div>
+                        <div>
+                            <div class="card-title">Field Service</div>
+                            <div class="card-subtitle">Service Coordination</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Coordinate field service operations by scheduling technicians, managing routes, and ensuring proper equipment and parts availability.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Field Service</span>
+                            <span class="tech-tag">Scheduling</span>
+                            <span class="tech-tag">Route Optimization</span>
+                            <span class="tech-tag">Resource Management</span>
+                            <span class="tech-tag">Service Coordination</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Service Request → Scheduling → Routing → Dispatch → Service → Completion</div>
+                            <div class="architecture-item">Request Data → Scheduling → Routing → Dispatch → Service → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Technician availability</li>
+                                <li>Service locations</li>
+                                <li>Equipment requirements</li>
+                                <li>Route optimization</li>
+                                <li>Skill matching</li>
+                                <li>Time windows</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Scheduling Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Route Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Service Completion</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proactive Support Outreach Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📢</div>
+                        <div>
+                            <div class="card-title">Proactive Support</div>
+                            <div class="card-subtitle">Outreach Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Proactively reach out to customers with potential issues, preventive maintenance suggestions, and service updates.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Proactive Outreach</span>
+                            <span class="tech-tag">Predictive Support</span>
+                            <span class="tech-tag">Customer Engagement</span>
+                            <span class="tech-tag">Preventive Maintenance</span>
+                            <span class="tech-tag">Service Communication</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Data → Risk Analysis → Outreach → Communication → Prevention → Satisfaction</div>
+                            <div class="architecture-item">Customer Data → Analysis → Outreach → Communication → Prevention → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer usage patterns</li>
+                                <li>Service history</li>
+                                <li>Risk indicators</li>
+                                <li>Preventive measures</li>
+                                <li>Communication preferences</li>
+                                <li>Engagement metrics</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Issue Prevention</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Customer Engagement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Service Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLA Monitoring Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">⏰</div>
+                        <div>
+                            <div class="card-title">SLA Monitoring</div>
+                            <div class="card-subtitle">Compliance Tracking</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Continuously monitor SLA compliance across all service operations and trigger alerts and interventions when breaches are imminent.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">SLA Monitoring</span>
+                            <span class="tech-tag">Compliance Tracking</span>
+                            <span class="tech-tag">Alert Management</span>
+                            <span class="tech-tag">Intervention Triggers</span>
+                            <span class="tech-tag">Service Quality</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Service Data → SLA Tracking → Compliance Monitoring → Alerts → Interventions → Prevention</div>
+                            <div class="architecture-item">Service Data → Tracking → Monitoring → Alerts → Interventions → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>SLA requirements</li>
+                                <li>Service metrics</li>
+                                <li>Alert thresholds</li>
+                                <li>Intervention protocols</li>
+                                <li>Compliance reporting</li>
+                                <li>Performance analytics</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Compliance Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Alert Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Intervention Success</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of customer service and support operations</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of customer privacy, data security, and service quality
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
